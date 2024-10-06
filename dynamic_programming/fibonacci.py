@@ -41,6 +41,18 @@ def fibonacci(n: int) -> int:
 # Indice: la fonction doit être récursive.
 
 
+def fibonacci_chap(n: int, memo: dict) -> int:
+    if n in memo:
+        return memo[n]
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        memo[n] = fibonacci_chap(n - 1, memo) + fibonacci_chap(n - 2, memo)
+        return memo[n]
+
+
 def fibonacci_memo(n: int) -> int:
     """
     Calcule le n-ième terme de la suite de Fibonacci, en mémorisant les
@@ -48,25 +60,6 @@ def fibonacci_memo(n: int) -> int:
     """
 
     # BEGIN SOLUTION
-    # Initialiser le dictionnaire de mémorisation
     memo = {}
-
-    # Appel de la fonction auxiliaire pour calculer Fibonacci avec mémorisation
-    def fibonacci_memo_helper(n: int, memo: dict) -> int:
-        if n in memo:  # Si déjà calculé, retourner la valeur mémorisée
-            return memo[n]
-        if n == 0:  # Cas de base pour n=0
-            return 0
-        elif n == 1:  # Cas de base pour n=1
-            return 1
-        else:
-            # Calculer et mémoriser la valeur de Fibonacci pour n
-            memo[n] = fibonacci_memo_helper(n - 1, memo) + fibonacci_memo_helper(
-                n - 2, memo
-            )
-            return memo[n]
-
-    # Appeler la fonction auxiliaire avec le dictionnaire vide
-    return fibonacci_memo_helper(n, memo)
-
+    return fibonacci_chap(n, memo)
     # END SOLUTION

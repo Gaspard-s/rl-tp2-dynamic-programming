@@ -19,23 +19,21 @@ def domino_paving(n: int) -> int:
     a = 0
     # BEGIN SOLUTION
     if n == 0:
-        return 1  # Il y a une seule façon de paver un rectangle 3x0 (aucun pavage)
+        return 1
     if n == 1:
-        return 0  # Il est impossible de paver un rectangle 3x1 avec des dominos 2x1
+        return 0
     if n == 2:
-        return 3  # Il y a 3 façons de paver un rectangle 3x2 (2 dominos horizontaux, ou 2 configurations différentes de dominos verticaux)
+        return 3
 
-    # Table pour stocker les solutions intermédiaires
     dp = [0] * (n + 1)
-
-    # Initialiser les valeurs de base
-    dp[0] = 1
-    dp[1] = 0
-    dp[2] = 3
+    dp[0], dp[1], dp[2] = 1, 0, 3
 
     # Calculer les solutions pour les dimensions plus grandes
     for i in range(3, n + 1):
-        dp[i] = 4 * dp[i - 2] - dp[i - 4] if i >= 4 else 4 * dp[i - 2]
+        if i > 3:
+            dp[i] = 4 * dp[i - 2] - dp[i - 4]
+        else:
+            4 * dp[i - 2]
 
     return dp[n]
     # END SOLUTION

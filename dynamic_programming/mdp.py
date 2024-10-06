@@ -55,10 +55,7 @@ class MDP(gym.Env):
             # État 1
             [(0, -1, False), (2, -1, False)],
             # État 2
-            [
-                (2, 0, False),
-                (0, -1, False),
-            ],
+            [(2, 0, False), (0, -1, False)],
         ]
         # END SOLUTION
 
